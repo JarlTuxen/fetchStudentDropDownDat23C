@@ -47,7 +47,10 @@
         <form>
           <div class="mb-3">
             <label for="input-name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="input-name">
+            <!-- input type="text" class="form-control" id="input-name" -->
+            <SELECT class="form-control" id="input-name">
+              <!-- her skal der fyldes navne ind til drop-down-listen-->
+            </SELECT>
           </div>
           <div class="mb-3">
             <label for="input-born-date" class="form-label">Born Date</label>
@@ -78,6 +81,16 @@
 //    {id: 100, name: "Madeleine Flynn", bornDate: "2012-03-12", bornTime: "12:01"},
 //    {id: 101, name: "Cecile Benson", bornDate: "2011-09-21", bornTime: "15:01"}
 //  ]
+
+  const names = [
+          "Sigurd",
+          "Laura",
+          "Bjarne",
+          "Mads",
+          "Bård",
+          "Madeleine Flynn",
+          "Cecile Benson"
+  ]
 
   let students = [];
 
@@ -142,7 +155,13 @@
     const myModal = new bootstrap.Modal(document.getElementById('student-modal'))
     document.getElementById("modal-title").innerText = student.id ? "Edit Student" : "Add Student"
     document.getElementById("student-id").innerText = student.id
-    document.getElementById("input-name").value = student.name
+    //document.getElementById("input-name").value = student.name
+    let selectElement = document.getElementById("input-name");
+    let selectHtmlArray = names.map(n =>{
+      let selectedText = (n === student.name? "SELECTED" : "");
+      return `<OPTION value="${n}" ${selectedText}>${n}</OPTION>`;
+    });
+    selectElement.innerHTML = selectHtmlArray.join();
     document.getElementById("input-born-date").value = student.bornDate
     document.getElementById("input-born-time").value = student.bornTime
     myModal.show()
